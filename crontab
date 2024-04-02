@@ -1,9 +1,6 @@
-# An example crontab with entries to (re)launch packet capture every hour,
-# and package into a tarball daily at 6am.
+# Hourly execution of packet capture or 15 seconds after a reboot
+0 * * * * /root/packetCapture/capturePackets.bash &2>/dev/null
+@reboot sleep 15 /root/packetCapture/capturePackets.bash &2>/dev/null
 
-# Hourly execution of  traffic capture
-0 * * * * /root/rootScripts/capturePackets.bash &2>/dev/null
-
-# 6am
-00 06 * * * /root/rootScripts/compactTrafficLogs.bash &2>/dev/null
-@reboot sleep 15 /root/rootScripts/capturePackets.bash &2>/dev/null
+# 6am daily packaging of packets
+00 06 * * * /root/packetCapture/packagePackets.bash &2>/dev/null
