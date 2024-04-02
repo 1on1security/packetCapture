@@ -2,11 +2,8 @@
 # and package into a tarball daily at 6am.
 
 # Hourly execution of  traffic capture
-0 * * * * /root/rootScripts/trafficLogs.bash &2>/dev/null
-
-# Hourly firewall reload
-59 * * * * /root/rootScripts/firewall/firewall.bash &2>/dev/null
+0 * * * * /root/rootScripts/capturePackets.bash &2>/dev/null
 
 # 6am
 00 06 * * * /root/rootScripts/compactTrafficLogs.bash &2>/dev/null
-@reboot sleep 15 /root/rootScripts/trafficLogs.bash &2>/dev/null
+@reboot sleep 15 /root/rootScripts/capturePackets.bash &2>/dev/null
